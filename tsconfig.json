@@ -27,7 +27,8 @@
   "paths": {
     "@public/*": "./public/*",
     "@client/*": "./src/client",
-    "@components/*": "./src/comoponents"
+    "@components/*": "./src/components",
+    "@assets/*": "./src/asstes"
   },
   "include": [
     "next-env.d.ts",
