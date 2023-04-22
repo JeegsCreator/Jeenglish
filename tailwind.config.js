@@ -12,7 +12,7 @@ export default {
     './src/**/*.{js,ts,jsx,tsx,mdx}'
   ],
   plugins: [
-    scrollbarPlugin
+    scrollbarPlugin({ nocompatible: true })
   ],
   theme: {
     extend: {

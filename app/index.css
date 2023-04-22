@@ -11,3 +11,11 @@
         clip-path: polygon(100% 0, 100% 100%, 80% 100%, 0 0);
     }
  }
+
+ html{
+    height: --webkit-fill-available;
+ }
+
+ body{
+    height: --webkit-fill-available;
+ }

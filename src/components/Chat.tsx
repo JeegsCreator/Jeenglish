@@ -123,7 +123,7 @@ const Chat = (): ReactElement => {
           onScroll={handleOnScroll}
           id='scroll'
           ref={scrollDivRef}
-          className='w-full p-2 flex flex-col gap-2 max-h-full overflow-y-scroll lg:px-8 scrollbar-thin'
+          className='w-full p-2 flex flex-col gap-2 max-h-full overflow-y-scroll lg:px-8 scrollbar-thin scrollbar-thumb-primary'
         >
           {/* render messages here */}
           {messages.map((message, i) => <ChatMessage key={i} sendBy={message.sendBy}>{message.children}</ChatMessage>)}

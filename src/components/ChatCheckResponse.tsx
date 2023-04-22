@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react'
 import { ApiResponse, Error } from '../types/chat'
+import confetti from 'canvas-confetti'
 
 const ChatError = ({ issueType, message, context, replacements }: Error): ReactElement => {
   let issueColor = 'before:bg-[#ff0]'
@@ -28,6 +29,13 @@ export default function ChatCheckResponse ({ data }: { data: ApiResponse }): Rea
   const { isCorrect, errors } = data
 
   if (isCorrect) {
+    confetti({
+      particleCount: 100,
+      spread: 80,
+      origin: {
+        x: Math.random()
+      }
+    })
     return (<p className='text-base'>Good job! You have 0 mistakes 🎉🎉🎉</p>)
   }
 
