@@ -24,7 +24,7 @@ export default function RootLayout ({
 }): ReactElement {
   return (
     <html lang='en'>
-      <body className={font.className + ' bg-gray-background h-screen w-screen overflow-hidden max-h-screen flex flex-col relative'}>
+      <body className={font.className + ' bg-gray-background w-screen overflow-hidden max-h-screen flex flex-col relative h-screen h-[--webkit-fill-available] h-[fill-available]'}>
         {/* <Nav /> */}
         <main className='h-afull'>
           {children}

@@ -115,8 +115,8 @@ const Chat = (): ReactElement => {
   }, [])
 
   return (
-    <section className='w-full h-screen p-4 md:flex md:justify-center'>
-      <div className='will-change-transform bg-white h-full md:w-10/12 lg:w-8/12 rounded-2xl relative overflow-hidden flex flex-col-reverse'>
+    <section className='w-full h-screen h-[--webkit-fill-available] h-[fill-available] p-4 md:flex md:justify-center'>
+      <div className='will-change-transform bg-white md:w-10/12 lg:w-8/12 rounded-2xl relative overflow-hidden flex flex-col-reverse height: calc(100% + 2rem)'>
         <ChatInput addMessage={handleInput} />
         {showScrollButton && <button onClick={scrollToTheBottom} className='fixed z-20 bg-white aspect-square h-8 flex rounded-full justify-center items-center text-primary border border-gray-mid right-4 bottom-20'><Arrow /></button>}
         <div
