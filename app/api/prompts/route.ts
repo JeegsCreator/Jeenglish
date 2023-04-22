@@ -2,12 +2,22 @@ import { NextResponse } from 'next/server'
 import supabase from '../../../src/services/client/supabase'
 
 export async function GET (request: Request): Promise<Response> {
-  const { difficulty } = await request.json()
-  console.log(difficulty)
-  const { data, error } = await supabase
-    .from('writing_prompts')
-    .select()
-    .eq('difficulty', 1)
+  const { searchParams } = new URL(request.url)
 
-  return NextResponse.json({ data, error })
+  const difficulty = searchParams.get('difficulty')
+
+  if (difficulty == null) throw Error('Difficulty param missing')
+
+  const parseDifficulty = Number(difficulty)
+
+  if (isNaN(parseDifficulty)) throw Error('Difficulty param type is wrong. must be a number')
+
+  const { data: prompts, error } = await supabase
+    .from('random_prompts')
+    .select()
+    .eq('difficulty', parseDifficulty)
+    .limit(1)
+    .single()
+
+  return NextResponse.json({ prompts, error })
 }

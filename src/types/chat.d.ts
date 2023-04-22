@@ -12,7 +12,7 @@ export type AddMessage = (text: string, sendBy: SendBy) => void
 export interface UseMessages {
   messages: Message[]
   addMessage: AddMessage
-  answer: (text: string) => void
+  createPrompt: () => Promise<void>
   addBotMessage: (text: any) => Promise<void>
 }
 

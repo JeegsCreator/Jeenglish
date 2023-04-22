@@ -48,7 +48,23 @@ export interface Database {
       }
     }
     Views: {
-      [_ in never]: never
+      random_prompts: {
+        Row: {
+          difficulty: number | null
+          id: number | null
+          prompt: string | null
+        }
+        Insert: {
+          difficulty?: number | null
+          id?: number | null
+          prompt?: string | null
+        }
+        Update: {
+          difficulty?: number | null
+          id?: number | null
+          prompt?: string | null
+        }
+      }
     }
     Functions: {
       [_ in never]: never

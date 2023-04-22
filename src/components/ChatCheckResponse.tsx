@@ -17,8 +17,8 @@ const ChatError = ({ issueType, message, context, replacements }: Error): ReactE
         <span>{message.short}</span>
       </p>
       <p>{message.long}</p>
-      <p className='flex gap-1'>
-        {replacements.slice(0, 6).map((r, i) => <span className='inline-block my-2 px-2 py-1 text-white rounded-lg bg-primary' key={i}>{r.value}</span>)}
+      <p className='flex gap-1 my-2 flex-wrap'>
+        {replacements.slice(0, 6).map((r, i) => <span className=' selection:bg-[#8eb1ff] inline-bloc px-2 py-1 text-white rounded-lg bg-primary' key={i}>{r.value}</span>)}
       </p>
     </div>
   )

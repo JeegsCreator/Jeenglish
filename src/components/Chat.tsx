@@ -71,10 +71,10 @@ const exampleErrors: ApiResponse = {
 }
 
 const Chat = (): ReactElement => {
-  const { messages, addMessage, addBotMessage } = useMessages([
+  const { messages, addMessage, addBotMessage, createPrompt } = useMessages([
     {
       sendBy: 'bot',
-      children: 'Ready for practice your English?'
+      children: 'Ready for practice your English? Here is your first prompt:'
     }
   ])
   const [showScrollButton, setShowScrollButton] = useState(false)
@@ -109,16 +109,21 @@ const Chat = (): ReactElement => {
     scrollToTheBottom()
   }, [messages])
 
+  // eslint-disable-next-line
+  useEffect(async () => {
+    createPrompt().catch(err => console.error(err.message))
+  }, [])
+
   return (
-    <section className='w-full h-screen p-4'>
-      <div className='will-change-transform bg-white h-full rounded-2xl relative overflow-hidden flex flex-col-reverse'>
+    <section className='w-full h-screen p-4 md:flex md:justify-center'>
+      <div className='will-change-transform bg-white h-full md:w-10/12 lg:w-8/12 rounded-2xl relative overflow-hidden flex flex-col-reverse'>
         <ChatInput addMessage={handleInput} />
         {showScrollButton && <button onClick={scrollToTheBottom} className='fixed z-20 bg-white aspect-square h-8 flex rounded-full justify-center items-center text-primary border border-gray-mid right-4 bottom-20'><Arrow /></button>}
         <div
           onScroll={handleOnScroll}
           id='scroll'
           ref={scrollDivRef}
-          className='w-full p-2 flex flex-col gap-2 max-h-full overflow-y-scroll'
+          className='w-full p-2 flex flex-col gap-2 max-h-full overflow-y-scroll lg:px-8 scrollbar-thin'
         >
           {/* render messages here */}
           {messages.map((message, i) => <ChatMessage key={i} sendBy={message.sendBy}>{message.children}</ChatMessage>)}

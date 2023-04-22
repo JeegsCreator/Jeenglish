@@ -1,30 +1,42 @@
 
 import { ReactElement, useState } from 'react'
-import { Message, SendBy, UseMessages } from '../../types/chat'
+import { ApiResponse, Message, SendBy, UseMessages } from '../../types/chat'
 import ChatCheckResponse from '../../components/ChatCheckResponse'
+import fetchPrompts from './usePrompts'
 
 function useMessages (defaultValue: Message[]): UseMessages {
   const [messages, setMessages] = useState(defaultValue)
 
-  const answer = (text: string): void => {
-    addMessage(text, 'user')
+  const createPrompt = async (): Promise<void> => {
+    createLoading()
+    const prompt = await fetchPrompts({ difficulty: 1 })
+    removeLastMessage()
+    if (prompt.prompt != null) addMessage(prompt.prompt, 'bot')
+  }
+
+  const createLoading = (): void => {
+    addMessage('...', 'bot')
   }
 
   const addBotMessage = async (text: string): Promise<void> => {
-    addMessage('...', 'bot')
+    createLoading()
 
     fetch('/api/check', {
       method: 'POST',
       body: text
     })
       .then(async res => await res.json())
-      .then(data => {
+      .then(async (data: ApiResponse) => {
         console.log(data)
         removeLastMessage()
         addMessage(<ChatCheckResponse data={data} />, 'bot')
+
+        if (data.isCorrect) {
+          await createPrompt()
+        }
       })
       .catch((err) => {
-        console.warn('local')
+        console.error(err)
         console.log(err.message)
         removeLastMessage()
         const errorMessage: string = handleError[err.message] ?? ''
@@ -67,7 +79,7 @@ function useMessages (defaultValue: Message[]): UseMessages {
     })
   }
 
-  return { messages, addMessage, answer, addBotMessage }
+  return { messages, addMessage, createPrompt, addBotMessage }
 }
 
 export { useMessages }

@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { ApiResponse } from '../../../src/types/chat'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const refactoredExampleResponse = {
@@ -95,10 +96,12 @@ export async function POST (request: Request): Promise<Response | undefined> {
       }
     })
 
-    return NextResponse.json({
+    const res: ApiResponse = {
       isCorrect: false,
       errors
-    })
+    }
+
+    return NextResponse.json(res)
     // return NextResponse.json(data.matches)
   } catch (err) {
     console.warn('route')
