@@ -41,6 +41,9 @@
     "extends": [
       "plugin:@next/next/recommended",
       "./node_modules/ts-standard/eslintrc.json"
-    ]
+    ],
+    "rules": {
+      "@typescript-eslint/explicit-function-return-type": "off"
+    }
   }
 }

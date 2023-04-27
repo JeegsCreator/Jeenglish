@@ -74,18 +74,18 @@ const Chat = (): ReactElement => {
   const { messages, addMessage, addBotMessage, createPrompt } = useMessages([
     {
       sendBy: 'bot',
-      children: 'Ready for practice your English? Here is your first prompt:'
+      children: 'Ready for practice your English? Here is your first prompt:',
+      id: 1
     }
   ])
   const [showScrollButton, setShowScrollButton] = useState(false)
   const scrollDivRef = useRef<HTMLDivElement>(null)
 
   const handleInput = async (text: string): Promise<void> => {
-    addMessage(text, 'user')
+    await addMessage(text, 'user')
     await addBotMessage(text)
   }
-  const scrollToTheBottom = (): void => {
-    console.dir(scrollDivRef.current)
+  const scrollToTheBottom = () => {
     const scrollHeight = scrollDivRef.current?.scrollHeight
 
     scrollDivRef.current?.scroll({
@@ -108,8 +108,7 @@ const Chat = (): ReactElement => {
     scrollToTheBottom()
   }, [messages])
 
-  // eslint-disable-next-line
-  useEffect(async () => {
+  useEffect(() => {
     createPrompt().catch(err => console.error(err.message))
   }, [])
 
@@ -124,8 +123,7 @@ const Chat = (): ReactElement => {
           ref={scrollDivRef}
           className='w-full p-2 flex flex-col gap-2 max-h-full overflow-y-scroll lg:px-8 scrollbar-thin scrollbar-thumb-primary'
         >
-          {/* render messages here */}
-          {messages.map((message, i) => <ChatMessage key={i} sendBy={message.sendBy}>{message.children}</ChatMessage>)}
+          {messages.map((message) => <ChatMessage key={message.id} sendBy={message.sendBy}>{message.children}</ChatMessage>)}
         </div>
       </div>
     </section>

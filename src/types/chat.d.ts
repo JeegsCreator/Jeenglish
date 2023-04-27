@@ -3,17 +3,9 @@ import { ReactElement } from 'react'
 export type SendBy = 'bot' | 'user'
 
 export interface Message {
+  id: number
   sendBy: SendBy
   children: ReactElement | string
-}
-
-export type AddMessage = (text: string, sendBy: SendBy) => void
-
-export interface UseMessages {
-  messages: Message[]
-  addMessage: AddMessage
-  createPrompt: () => Promise<void>
-  addBotMessage: (text: any) => Promise<void>
 }
 
 export interface Error {

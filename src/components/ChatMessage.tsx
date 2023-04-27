@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import { Message } from '../types/chat'
 
-function ChatMessage ({ sendBy, children }: Message): ReactElement {
+function ChatMessage ({ sendBy, children }: Omit<Message, 'id'>): ReactElement {
   const botStyles = 'bg-primary before:bg-primary text-white before:left-0 before:triangle-left'
   const userStyles = 'bg-gray-message before:bg-gray-message self-end before:right-0 before:triangle-right'
   const isbot = sendBy === 'bot'
